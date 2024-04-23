@@ -1,0 +1,56 @@
+
+.custom-div {
+    padding: 20px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.size-title {
+    font-size: 80px;
+}
+
+.center {
+    text-align: center;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.padding-top-5 {
+    padding-top: 5%;
+}
+
+.padding-top-10 {
+    padding-top: 10%;
+}
+
+
+.padding-login {
+    padding: 0% 10% 10% 10%;
+}
+
+.footer {
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
+    background:black;
+    color: white;
+    padding-bottom: 2%;
+}
+
+input.custom-input {
+    width: 60%;
+    margin: 0 auto;
+    background-color : #E2E0E0;
+    border: 1px solid #000; 
+}
+
+.button-login {
+    width: 40%;
+    background: linear-gradient(180deg, #a6cee2 0%, #87c7f1 100%);
+}
