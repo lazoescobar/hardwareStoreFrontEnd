@@ -4,32 +4,53 @@ import {signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+
+import InputField from '../../components/common/inputField';
+
 const LoginPage = () => {
-  const [errors, setErrors] = useState<string[]>([]);
+
+  const [errorValidUserName, setErrorValidUserName] = useState<boolean | undefined>(false);
+  const [errorValidPass, setErrorValidPass] = useState<boolean | undefined>(false);
+  const [error, setError] = useState<string>("");
   const [username, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
+  const handleInputChangeUss = (value: string, error: boolean | undefined) => {
+    setErrorValidUserName(error);
+    if(!error){
+      setUserName(value);
+    } 
+  };
+
+  const handleInputChangePass = (value: string, error: boolean | undefined) => {
+    setErrorValidPass(error);
+    if(!error){
+      setPassword(value);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setErrors([]);
+    setError("");
+    if(!errorValidUserName && !errorValidPass){
+      const responseNextAuth = await signIn("credentials", {
+        username,
+        password,
+        redirect: false,
+      });
 
-    const responseNextAuth = await signIn("credentials", {
-      username,
-      password,
-      redirect: false,
-    });
-
-    if (responseNextAuth?.error) {
-      setErrors(responseNextAuth.error.split(","));
-      return;
+      if (responseNextAuth?.error) {
+        setError(responseNextAuth?.error as string);
+        return;
+      }
+      
+      router.push("/cestaproductos");
     }
-
-    router.push("/cestaproductos");
-  
   };
 
   return (
+    
     <div className="container-fluid">
       <div className="row justify-content-center">
       <div className="col-md-12 padding-top-10">
@@ -42,32 +63,24 @@ const LoginPage = () => {
             <h3 className="text-center">Inicio de sesión</h3>
             <br></br>
             <form className="center" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="USS"
-                name="username"
-                className="text-center form-control custom-input"
-                value={username}
-                onChange={(event) => setUserName(event.target.value)}
-              />
+              <InputField className="text-center form-control custom-input" placeholder="USS" type="text" expresionRegular={/^@.*/} mensajeValidacion="usuario debe comenzar con @" onChange={handleInputChangeUss} />
               <br></br>
-              <input
-                type="password"
-                placeholder="PASS"
-                name="password"
-                className="text-center form-control custom-input"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              <br></br>
+              <InputField className="text-center form-control custom-input" placeholder="PASS" type="password" expresionRegular={/^.+$/} mensajeValidacion="Al menos un caracter" onChange={handleInputChangePass} />
               <br></br>
               <br></br>
               <button
                 type="submit"
-                className="btn button-login"
-              >
+                className="btn button-login">
                 Login
               </button>
             </form>
+            <br></br>
+            { (error?.trim().length > 0 ) &&
+              <div className="text-center alert alert-danger" role="alert">
+                {error}
+              </div>
+            }
           </div>
         </div>
       </div>
@@ -76,9 +89,7 @@ const LoginPage = () => {
           <p>Producto de software desarrollado por Agustin Lazo Escobar</p>
         </div>
       </footer>
-    </div>
-    
-      
+    </div> 
   );
 };
 export default LoginPage;

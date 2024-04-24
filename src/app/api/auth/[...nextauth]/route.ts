@@ -10,31 +10,29 @@ const handler = NextAuth({
         username: { label: "UserName", type: "text", placeholder: "usuario"},
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
-        if( process.env.NODE_ENV === "development"){
-          const user = { id: 1, username: credentials?.username, paths : [ "/product", "/sales"]};
-          const token = jwt.sign(user, "TOKEN", {
-            expiresIn:  '1m', // Puedes ajustar la expiración según tus necesidades
+      async authorize(credentials) {
+        const resLogin = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/modulo-usuario/login`,{
+            method: "POST",
+            body: JSON.stringify({
+              uss: credentials?.username,
+              pass: credentials?.password,
+            }),
+            headers: { "Content-Type": "application/json" },
           });
 
-          return { ...user, token }; 
-        }
-        else{
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
-            {
-              method: "POST",
-              body: JSON.stringify({
-                email: credentials?.username,
-                password: credentials?.password,
-              }),
-              headers: { "Content-Type": "application/json" },
-            }
-          );
-          const user = await res.json();
-          if (user.error) return null;
-          return user;
-        }
+          const infoLogin = await resLogin.json();
+          
+          if(resLogin.status !== 200){
+            const {mensaje} = infoLogin; 
+            throw new Error(mensaje);
+          }
+          else{
+            const userInfo = {...infoLogin};
+            const token = jwt.sign(userInfo, "TOKEN", {
+              expiresIn:  '1m',
+            });
+            return {...userInfo, token} ;
+          }
       },
     }),
   ],
