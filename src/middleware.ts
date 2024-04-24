@@ -19,7 +19,7 @@ export default withAuth(
       }
       if(decoded){
         if(req.nextUrl.pathname === "/"){
-          return NextResponse.redirect(new URL('/dashboard', req.url))
+          return NextResponse.redirect(new URL('/cestaproductos', req.url))
         }
       }
     } catch (error) {
@@ -29,5 +29,5 @@ export default withAuth(
 )
 
 export const config = {
-  matcher: ["/", "/dashboard/:path*"],
+  matcher: ["/", "/dashboard/:path*", "/cestaproductos/:path*"],
 };

@@ -1,23 +1,25 @@
 "use client";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+import LayoutPages from '../../layout/LayoutPages';
 
 const Dashboard = () => {
   const { data: session, status } = useSession();
-  const [cats, setCats] = useState([]);
 
   if (status === "loading") {
     return <p>Loading...</p>;
   }
 
   return (
+    
     <div>
-      <h1>Dashboard</h1>
+      <LayoutPages>
+      <h1>Cesta productos</h1>
       <pre>
-        <code>{JSON.stringify(session, null, 2)}</code>
+        { /*<code>{JSON.stringify(session, null, 2)}</code>*/ }
       </pre>
     
-    { (session) && 
+    { /*(session) && 
       <>
         <button
           onClick={() => signOut()}
@@ -25,8 +27,10 @@ const Dashboard = () => {
         >
           Sign out
         </button>
-      </>
+      </>*/
     }
+      </LayoutPages>
+      
     </div>
 
 

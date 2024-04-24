@@ -11,11 +11,7 @@ const LoginPage = () => {
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    
     event.preventDefault();
-    console.log("OK")
-    
-    /*
     setErrors([]);
 
     const responseNextAuth = await signIn("credentials", {
@@ -29,8 +25,7 @@ const LoginPage = () => {
       return;
     }
 
-    router.push("/dashboard");
-    */
+    router.push("/cestaproductos");
   
   };
 
