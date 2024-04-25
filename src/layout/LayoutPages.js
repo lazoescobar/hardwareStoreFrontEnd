@@ -1,9 +1,9 @@
-import Navbar from '../components/navBar';
+import Header from '../components/common/header';
 
 const LayoutPages = ({ children }) => {
   return (
-    <div>
-      <Navbar />
+    <div className='container-fluid'>
+      <Header />
       <main>{children}</main>
       <footer>
         {/* Aquí puedes colocar tu pie de página común */}

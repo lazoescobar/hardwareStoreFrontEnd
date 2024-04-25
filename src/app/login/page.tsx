@@ -12,7 +12,7 @@ const LoginPage = () => {
   const [errorValidUserName, setErrorValidUserName] = useState<boolean | undefined>(false);
   const [errorValidPass, setErrorValidPass] = useState<boolean | undefined>(false);
   const [error, setError] = useState<string>("");
-  const [username, setUserName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
@@ -35,13 +35,13 @@ const LoginPage = () => {
     setError("");
     if(!errorValidUserName && !errorValidPass){
       const responseNextAuth = await signIn("credentials", {
-        username,
+        username: userName,
         password,
         redirect: false,
       });
 
       if (responseNextAuth?.error) {
-        setError(responseNextAuth?.error as string);
+        setError(responseNextAuth?.error);
         return;
       }
       
@@ -51,7 +51,7 @@ const LoginPage = () => {
 
   return (
     
-    <div className="container-fluid">
+    <div className="container">
       <div className="row justify-content-center">
       <div className="col-md-12 padding-top-10">
           <h1 className="text-center bold size-title">Bienvenido a HardwareStore</h1>

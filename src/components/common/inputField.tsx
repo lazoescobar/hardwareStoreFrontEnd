@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 interface InputProps {
-    className: string;
-    placeholder?: string | undefined;
-    type: string;
-    initialValue?: string;
-    expresionRegular?: any | undefined;
-    mensajeValidacion?: string | undefined;
-    onChange: (value: string, error: boolean | undefined) => void;
-  }
+  className: string;
+  placeholder?: string | undefined;
+  type: string;
+  initialValue?: string;
+  expresionRegular?: any | undefined;
+  mensajeValidacion?: string | undefined;
+  onChange: (value: string, error: boolean | undefined) => void;
+}
 
 
 const InputField: React.FC<InputProps> = ({className, placeholder, type, initialValue = '', expresionRegular, mensajeValidacion, onChange }) => {

@@ -1,0 +1,23 @@
+.spacingLateral {
+    padding-left: 0%; /* 5% del ancho de la ventana del navegador */
+    padding-right: 0%; /* 5% del ancho de la ventana del navegador */
+}
+
+.contenidoCentro{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenidoFinal{
+    height: 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.espacioNombreUsuario{
+    padding: 5px;
+}
+

@@ -29,7 +29,7 @@ const handler = NextAuth({
           else{
             const userInfo = {...infoLogin};
             const token = jwt.sign(userInfo, "TOKEN", {
-              expiresIn:  '1m',
+              expiresIn:  '60m',
             });
             return {...userInfo, token} ;
           }

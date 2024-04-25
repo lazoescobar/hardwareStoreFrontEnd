@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="container">
+        <main className="container-fluid">
           <SessionAuthProvider>
             {children}
           </SessionAuthProvider>
