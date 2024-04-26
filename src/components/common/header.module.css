@@ -3,7 +3,6 @@
     padding-right: 0%; /* 5% del ancho de la ventana del navegador */
 }
 
-
 .contenidoCentro{
     height: 100px;
     display: flex;
@@ -27,14 +26,4 @@
     align-items: flex-end;
     justify-content: flex-end;
     color: #3795EE ;
-}
-
-.links{
-    display: flex;
-    justify-content: center;
-    color: #3795EE ;
-}
-
-.contenedorLinks{
-    padding-top: 1%;
 }

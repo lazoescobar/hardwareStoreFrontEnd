@@ -1,25 +1,30 @@
-import { signOut, useSession } from "next-auth/react";
-import { usePathname } from 'next/navigation';
+"use client";
+import { signOut } from "next-auth/react";
 import styles from './header.module.css'
 
 import LinksHeader from './linksHeader';
 
-const Header = () => {
 
-  const { data:session } = useSession();
-  const { nombreUsuario, accesos:listaAceesos } = session?.user as any;
-  const pathname = usePathname()
-  console.log(session);
+interface Link {
+  nombre: string;
+  ruta: string;
+}
+interface Props{
+  nombreUsuario: string;
+  listadoLinks : Array<Array<Link>>;
+}
+
+const Header : React.FC<Props> = ({ nombreUsuario, listadoLinks}) => {
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-4">
-          <LinksHeader listadoLinks={listaAceesos}></LinksHeader>
+          <LinksHeader listadoLinks={listadoLinks}></LinksHeader>
         </div>
         <div className="col-lg-4">
           <div className={styles.contenidoCentro}>
-              <h1> HardwareStore</h1>
+              <h1> <strong> HardwareStore </strong></h1>
           </div>
         </div>
         <div className="col-lg-4">

@@ -4,8 +4,8 @@ import {signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
-import InputField from '../../components/common/inputField';
+import Footer from "@/components/common/footer";
+import InputField from "@/components/common/inputField";
 
 const LoginPage = () => {
 
@@ -84,11 +84,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <footer className="footer">
-        <div className="container text-center padding-bottom-10">
-          <p>Producto de software desarrollado por Agustin Lazo Escobar</p>
-        </div>
-      </footer>
+      <Footer/>
     </div> 
   );
 };

@@ -1,0 +1,21 @@
+.links{
+    display: flex;
+    justify-content: center;
+    color: #3795EE ;
+}
+
+.contenedorLinks{
+    padding-top: 1%;
+}
+
+.contenedorLinksWithOne{
+    padding-top: 5%;
+}
+
+.activelink {
+    text-decoration: underline;
+  }
+
+.inactivelink {
+    text-decoration: none;
+}
