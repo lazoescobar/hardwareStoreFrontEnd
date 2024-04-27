@@ -1,26 +1,22 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import styles from './header.module.css'
-
 import LinksHeader from './linksHeader';
 
+const Header : React.FC= () => {
 
-interface Link {
-  nombre: string;
-  ruta: string;
-}
-interface Props{
-  nombreUsuario: string;
-  listadoLinks : Array<Array<Link>>;
-}
+  const { data:session } = useSession();
+  if(!session){
+    return;
+  }
 
-const Header : React.FC<Props> = ({ nombreUsuario, listadoLinks}) => {
+  const { nombreUsuario, accesos } = session.user;
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-lg-4">
-          <LinksHeader listadoLinks={listadoLinks}></LinksHeader>
+          <LinksHeader listadoLinks={accesos}></LinksHeader>
         </div>
         <div className="col-lg-4">
           <div className={styles.contenidoCentro}>

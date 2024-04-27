@@ -10,7 +10,7 @@ const NuevoProducto = () => {
 
   return ( 
     <div>
-      <LayoutPages nombreUsuario={session.user.nombreUsuario} listadoLinks={session.user.accesos}>
+      <LayoutPages>
       <h1>Nuevo Producto</h1>
       </LayoutPages>
 
