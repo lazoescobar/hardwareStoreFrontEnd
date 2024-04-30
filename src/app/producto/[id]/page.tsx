@@ -6,6 +6,8 @@ import LayoutPages from '../../../layout/LayoutPages';
 import Titulo from '../../../components/paginas/titulo';
 import Mensaje from '../../../components/paginas/mensaje';
 
+import FormularioCambioNombre from '../../../components/paginas/producto/formularioCambioNombre';
+
 import obtenerinfoProducto, {InformacionProducto} from '@/services/producto/obtenerInformacionProducto';
 
 const DetalleProducto  = () => {
@@ -27,6 +29,10 @@ const DetalleProducto  = () => {
     })
   }, []);
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div>
        <LayoutPages>
@@ -37,7 +43,20 @@ const DetalleProducto  = () => {
 
           {
           (errorProducto === false &&  producto !== undefined) &&
+            <>
             <Titulo titulo="Producto" utilizaDosPuntos={true} complemento={producto.producto.nombre}></Titulo>
+            <br/>
+            <div className="container-fluid">
+              <div className="row justify-content-center">
+                <div className="col-lg-6 text-center">
+                  <h3>f</h3>
+                </div>
+                <div className="col-lg-6 text-center">
+                  <FormularioCambioNombre nombreActual={producto.producto.nombre}></FormularioCambioNombre>
+                </div>
+              </div>
+            </div>
+            </>
           }
       </LayoutPages>
     </div>

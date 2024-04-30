@@ -50,6 +50,14 @@ input.custom-input {
     border: 1px solid #000; 
 }
 
+
+input.custom-input-white {
+    width: 60%;
+    margin: 0 auto;
+    
+    border: 1px solid #000; 
+}
+
 .button-login {
     width: 40%;
     background: linear-gradient(180deg, #a6cee2 0%, #87c7f1 100%);
