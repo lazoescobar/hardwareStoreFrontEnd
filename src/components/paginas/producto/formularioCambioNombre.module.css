@@ -7,3 +7,15 @@
 .subrayado {
     text-decoration: underline;
 }
+
+
+.inputlikediv {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color : #E2E0E0;
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #000; 
+  }
+  

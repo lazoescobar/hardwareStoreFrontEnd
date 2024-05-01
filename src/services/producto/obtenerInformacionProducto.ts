@@ -1,23 +1,22 @@
-interface Producto {
-    id: number;
-    nombre: string;
-    fechaRegistro: string;
-    fechaModificacion: string;
-}
- 
-export interface InformacionProducto {
-    mensaje: string;
-    producto : Producto;
-}
+import { InformacionProducto, InfoProducto } from './types/InterfacesProducto';
   
-async function obtenerinfoProducto(id: string | string[]): Promise<InformacionProducto> {
+async function obtenerinfoProducto(id: string | string[]): Promise<InfoProducto> {
     try {
-      const response = await fetch(`/api/producto/${id}`);
+      const response = await fetch(`/api/producto/${id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      });
+      
       if (!response.ok) {
         throw new Error('Error al obtener los datos');
       }
       const data: InformacionProducto = await response.json();
-      return data;
+      const producto : InfoProducto = data.infoProducto;
+      console.log(producto);
+      return producto;
     } catch (error) {
       console.error('Error al llamar a la API:', error);
       throw error;

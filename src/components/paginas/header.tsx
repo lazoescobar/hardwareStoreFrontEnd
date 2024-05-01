@@ -3,7 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import styles from './header.module.css'
 import LinksHeader from './linksHeader';
 
-const Header : React.FC= () => {
+const Header : React.FC = () => {
 
   const { data:session } = useSession();
   if(!session){

@@ -18,16 +18,12 @@ const LoginPage = () => {
 
   const handleInputChangeUss = (value: string, error: boolean | undefined) => {
     setErrorValidUserName(error);
-    if(!error){
-      setUserName(value);
-    } 
+    setUserName(value);
   };
 
   const handleInputChangePass = (value: string, error: boolean | undefined) => {
     setErrorValidPass(error);
-    if(!error){
-      setPassword(value);
-    }
+    setPassword(value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -63,10 +59,24 @@ const LoginPage = () => {
             <h3 className="text-center">Inicio de sesión</h3>
             <br></br>
             <form className="center" onSubmit={handleSubmit}>
-              <InputField className="text-center form-control custom-input" placeholder="USS" type="text" expresionRegular={/^@.*/} mensajeValidacion="usuario debe comenzar con @" onChange={handleInputChangeUss} />
+              <InputField 
+                className="text-center form-control custom-input" 
+                placeholder="USS" 
+                type="text" 
+                value={userName} 
+                expresionRegular={/^@.*/} 
+                mensajeValidacion="usuario debe comenzar con @" 
+                onChange={handleInputChangeUss} />
               <br></br>
               <br></br>
-              <InputField className="text-center form-control custom-input" placeholder="PASS" type="password" expresionRegular={/^.+$/} mensajeValidacion="Al menos un caracter" onChange={handleInputChangePass} />
+              <InputField 
+                className="text-center form-control custom-input" 
+                placeholder="PASS" 
+                type="password" 
+                value={password} 
+                expresionRegular={/^.+$/} 
+                mensajeValidacion="Al menos un caracter" 
+                onChange={handleInputChangePass} />
               <br></br>
               <br></br>
               <button

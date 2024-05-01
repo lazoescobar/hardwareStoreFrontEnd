@@ -8,7 +8,8 @@ import Mensaje from '../../../components/paginas/mensaje';
 
 import FormularioCambioNombre from '../../../components/paginas/producto/formularioCambioNombre';
 
-import obtenerinfoProducto, {InformacionProducto} from '@/services/producto/obtenerInformacionProducto';
+import obtenerinfoProducto from '@/services/producto/obtenerInformacionProducto';
+import { InfoProducto } from '@/services/producto/types/InterfacesProducto';
 
 const DetalleProducto  = () => {
 
@@ -16,7 +17,7 @@ const DetalleProducto  = () => {
   const {id} = params;
   
   const [errorProducto, setErrorProducto] = useState<boolean | undefined >(undefined);
-  const [producto, setProducto] = useState<InformacionProducto | undefined>(undefined);
+  const [producto, setProducto] = useState<InfoProducto | undefined>(undefined);
 
   useEffect(() => {
     obtenerinfoProducto(id)
@@ -29,34 +30,30 @@ const DetalleProducto  = () => {
     })
   }, []);
 
-  const reloadPage = () => {
-    window.location.reload();
-  };
-
   return (
     <div>
        <LayoutPages>
           {
-          (errorProducto === true ) &&
-            <Mensaje titulo='Producto no encontrado' mensaje='No fue posible obtener producto desde los registros base' tipoMensaje='NOTFOUND' footerMensaje=''></Mensaje>
+            (errorProducto === true ) &&
+              <Mensaje titulo='Producto no encontrado' mensaje='No fue posible obtener producto desde los registros base' tipoMensaje='NOTFOUND' footerMensaje=''></Mensaje>
           }
 
           {
-          (errorProducto === false &&  producto !== undefined) &&
-            <>
-            <Titulo titulo="Producto" utilizaDosPuntos={true} complemento={producto.producto.nombre}></Titulo>
-            <br/>
-            <div className="container-fluid">
-              <div className="row justify-content-center">
-                <div className="col-lg-6 text-center">
-                  <h3>f</h3>
+            (errorProducto === false &&  producto !== undefined) &&
+              <>
+                <Titulo titulo="Producto" utilizaDosPuntos={true} complemento={producto.nombre}></Titulo>
+                <br/>
+                <div className="container-fluid">
+                  <div className="row justify-content-center">
+                    <div className="col-lg-6 text-center">
+                      <h3>f</h3>
+                    </div>
+                    <div className="col-lg-6 text-center">
+                      <FormularioCambioNombre producto={producto} actualizarProducto={setProducto}></FormularioCambioNombre>
+                    </div>
+                  </div>
                 </div>
-                <div className="col-lg-6 text-center">
-                  <FormularioCambioNombre nombreActual={producto.producto.nombre}></FormularioCambioNombre>
-                </div>
-              </div>
-            </div>
-            </>
+              </>
           }
       </LayoutPages>
     </div>
