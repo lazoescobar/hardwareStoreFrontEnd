@@ -7,6 +7,7 @@ import Titulo from '../../../components/paginas/titulo';
 import Mensaje from '../../../components/paginas/mensaje';
 
 import FormularioCambioNombre from '../../../components/paginas/producto/formularioCambioNombre';
+import FormularioRegistrarIngresoEgreso from '@/components/paginas/producto/formularioRegistrarIngresoEgreso';
 
 import obtenerinfoProducto from '@/services/producto/obtenerInformacionProducto';
 import { InfoProducto } from '@/services/producto/types/InterfacesProducto';
@@ -46,7 +47,7 @@ const DetalleProducto  = () => {
                 <div className="container-fluid">
                   <div className="row justify-content-center">
                     <div className="col-lg-6 text-center">
-                      <h3>f</h3>
+                      <FormularioRegistrarIngresoEgreso producto={producto}></FormularioRegistrarIngresoEgreso>
                     </div>
                     <div className="col-lg-6 text-center">
                       <FormularioCambioNombre producto={producto} actualizarProducto={setProducto}></FormularioCambioNombre>

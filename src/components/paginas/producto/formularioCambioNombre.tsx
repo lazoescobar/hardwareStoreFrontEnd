@@ -93,7 +93,7 @@ const FormularioCambioNombre : React.FC<Props> = ({ producto, actualizarProducto
             <form  onSubmit={handleSubmit}>
                 <div className="row justify-content-center">
                     <div className="col-lg-12 text-center">
-                        <h5>Formulario modificar nombre producto</h5>
+                        <h4> <strong> Formulario modificar nombre producto</strong></h4>
                         <br/>
                     </div>
                     <div className="col-lg-12 text-center">
@@ -112,7 +112,6 @@ const FormularioCambioNombre : React.FC<Props> = ({ producto, actualizarProducto
                                     <div className="col-lg-12 text-center"> <h6 className={styles.subrayado}> Reemplazar por</h6></div>
                                     <div className="col-lg-12 text-center"> 
                                         <InputField
-                                            id="formCambNombre-nuevoNombre" 
                                             disabled={inputNuevoNombreDesabilitado}
                                             className="text-center form-control custom-input-white" 
                                             placeholder="" 

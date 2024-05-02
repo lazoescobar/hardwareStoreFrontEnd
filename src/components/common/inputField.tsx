@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 interface InputProps {
-  id?: string;
   disabled?: boolean;
   className: string;
   placeholder?: string | undefined;
@@ -13,7 +12,7 @@ interface InputProps {
 }
 
 
-const InputField: React.FC<InputProps> = ({ id, disabled = false, className, placeholder, type, value = '', expresionRegular, mensajeValidacion, onChange}) => {
+const InputField: React.FC<InputProps> = ({ disabled = false, className, placeholder, type, value = '', expresionRegular, mensajeValidacion, onChange}) => {
     
     const classNameNormal = className;
     const classNameValidacion = className+" is-invalid";
@@ -46,7 +45,6 @@ const InputField: React.FC<InputProps> = ({ id, disabled = false, className, pla
     return (
       <div>
         <input
-          id={id} 
           placeholder={placeholder} 
           className={ (error)? classNameValidacion : classNameNormal} 
           type={type} 

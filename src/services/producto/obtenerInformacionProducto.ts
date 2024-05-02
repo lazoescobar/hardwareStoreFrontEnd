@@ -15,7 +15,6 @@ async function obtenerinfoProducto(id: string | string[]): Promise<InfoProducto>
       }
       const data: InformacionProducto = await response.json();
       const producto : InfoProducto = data.infoProducto;
-      console.log(producto);
       return producto;
     } catch (error) {
       console.error('Error al llamar a la API:', error);
