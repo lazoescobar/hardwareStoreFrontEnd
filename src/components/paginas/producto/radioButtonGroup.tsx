@@ -1,21 +1,17 @@
 import React from 'react';
 
-interface Options {
-  key: string;
-  value: string
-}
-
+import { Options } from  './types/Interface';
 
 interface RadioButtonGroupProps {
   options: Array<Options>;
   selectedValue: string | null;
-  onChange: (selectedValue: string) => void;
+  onChange: (selectedValue: string, label: string) => void;
 }
 
 const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ options, selectedValue, onChange }) => {
-  const handleRadioChange = (value: string) => {
-    if (value !== selectedValue) {
-      onChange(value);
+  const handleRadioChange = (key: string, value: string) => {
+    if (key !== selectedValue) {
+      onChange(key, value);
     }
   };
 
@@ -28,7 +24,7 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ options, selectedVa
               type="radio"
               value={option.key}
               checked={option.key === selectedValue}
-              onChange={() => handleRadioChange(option.key)}
+              onChange={() => handleRadioChange(option.key, option.value)}
             />
             <h5><strong> {option.value} </strong></h5>
           </label>

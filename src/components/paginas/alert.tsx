@@ -1,15 +1,18 @@
 "use client";
 import React, { useState } from 'react';
-import { Interface } from 'readline';
 
 interface Props {
     mostrar : boolean;
+    type?: string;
     mensaje : string;
 }
 
-const Alert: React.FC<Props> = ({ mostrar, mensaje }) => {
+const Alert: React.FC<Props> = ({ mostrar, type, mensaje }) => {
 
   const [alertVisible, setAlertVisible] = useState(mostrar);
+
+  let tipoAlerta = "row alert alert-danger";
+  if(type && type === "SUC") tipoAlerta = "row alert alert-success";
 
   const hideAlert = () => {
     setAlertVisible(false);
@@ -18,7 +21,7 @@ const Alert: React.FC<Props> = ({ mostrar, mensaje }) => {
   return (
     <div>
       {alertVisible && (
-        <div className="row alert alert-danger" role="alert">
+        <div className={tipoAlerta} role="alert">
           <div className="col-lg-10 text-center">
             <span>{mensaje}</span>
           </div>

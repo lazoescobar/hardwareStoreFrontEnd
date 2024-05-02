@@ -29,3 +29,8 @@
     cursor: pointer; /* Cursor de puntero al pasar el ratón */
     /* Añade otros estilos según tus necesidades */
 }
+
+.validacionmensaje{
+    color: #ee0707; 
+}
+  
