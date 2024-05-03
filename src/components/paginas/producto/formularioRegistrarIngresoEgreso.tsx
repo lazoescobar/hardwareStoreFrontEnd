@@ -14,6 +14,9 @@ import { Options } from  './types/Interface';
 import { InfoProducto } from '@/services/producto/types/InterfacesProducto';
 import obtenerStockActualProducto from '@/services/producto/obtenerStockActualProducto';
 
+import { InterfaceSalidaNuevoMovimiento } from '@/services/movimientosProducto/types/InterfaceMovimientoProducto';
+import nuevoMovimientoIngresoEgreso from '@/services/movimientosProducto/nuevoMovimientoIngresoEgreso';
+
 
 interface Props {
     producto: InfoProducto;
@@ -34,6 +37,7 @@ const FormularioRegistrarIngresoEgreso : React.FC<Props> = ({ producto }) => {
     const [mostrarAlertaIngresoEgreso, setMostrarAlertaIngresoEgreso] = useState<boolean>(false);
     const [tipoAlerta, setTipoAlerta] = useState<string>("");
     const [mensajeAlertaIngresoEgreso, setMensajeAlertaIngresoEgreso] = useState<string>("MENSAJE");
+    const [botonDesabilitado, setBotonDesabilitado] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -117,9 +121,40 @@ const FormularioRegistrarIngresoEgreso : React.FC<Props> = ({ producto }) => {
             setErrorCantidadCero(true);
             return;
         }
-        setErrorCantidadCero(false);
 
+        setErrorCantidadCero(false);
+        setBotonDesabilitado(true);
+        setMostrarAlertaIngresoEgreso(false);
+        setCargando(true);
         const {user} = session;
+        setTimeout(() => {
+            nuevoMovimientoIngresoEgreso(user.id, producto.id, selectedValue.key, cantidad)
+            .then(response => {
+                const nuevoMovimiento: InterfaceSalidaNuevoMovimiento = response;
+                setCargando(false);
+                setMostrarAlertaIngresoEgreso(true);
+                setMensajeAlertaIngresoEgreso(nuevoMovimiento.mensaje);
+                setTipoAlerta( (nuevoMovimiento.stockActual !== null) ? "SUC" :"ERR" );
+                if(nuevoMovimiento.stockActual || nuevoMovimiento.stockActual === 0){
+                    if(nuevoMovimiento.stockActual > 0){
+                        setStockActual(nuevoMovimiento.stockActual);
+                    }
+                    setStockActual(nuevoMovimiento.stockActual);
+                    if(selectedValue.key === "EGR" && nuevoMovimiento.stockActual < cantidad){
+                       setCantidad(nuevoMovimiento.stockActual);
+                    }
+                }
+                setCargando(false);
+            })
+            .catch(error => {
+                setCargando(false);
+                setMostrarAlertaIngresoEgreso(true);
+                setMensajeAlertaIngresoEgreso("No se pudo ingresar movimiento " + selectedValue.value);
+                setTipoAlerta("ERR")
+            })
+            setBotonDesabilitado(false);
+        }, 3000);
+
     }
 
 
@@ -226,7 +261,7 @@ const FormularioRegistrarIngresoEgreso : React.FC<Props> = ({ producto }) => {
                     }
 
                     <div className="col-lg-12 text-center">
-                        <button type="submit" className="btn btn-primary">Confirmar </button>
+                        <button type="submit" className="btn btn-primary" disabled={botonDesabilitado}>Confirmar </button>
                         <br/>
                         <br/>
                     </div>

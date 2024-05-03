@@ -13,6 +13,7 @@ const Alert: React.FC<Props> = ({ mostrar, type, mensaje }) => {
 
   let tipoAlerta = "row alert alert-danger";
   if(type && type === "SUC") tipoAlerta = "row alert alert-success";
+  if(type && type === "ERR") tipoAlerta = "row alert alert-danger";
 
   const hideAlert = () => {
     setAlertVisible(false);
