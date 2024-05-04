@@ -3,7 +3,7 @@ import { InterfaceSalidaNuevoMovimiento } from './types/InterfaceMovimientoProdu
 async function nuevoMovimientoIngresoEgreso(idUsuario: number, idProducto: number, tipoMovimiento: string, cantidad: number): Promise<InterfaceSalidaNuevoMovimiento> {
     
     try {
-        const response = await fetch(`/api/movimientos-producto/nuevo-movimiento/${idProducto}`, {
+        const response = await fetch(`/api/movimientos-producto/${idProducto}/nuevo-movimiento`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

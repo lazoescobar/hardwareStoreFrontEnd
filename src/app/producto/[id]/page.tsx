@@ -8,6 +8,7 @@ import Mensaje from '../../../components/paginas/mensaje';
 
 import FormularioCambioNombre from '../../../components/paginas/producto/formularioCambioNombre';
 import FormularioRegistrarIngresoEgreso from '@/components/paginas/producto/formularioRegistrarIngresoEgreso';
+import GrillaMovimientoProducto from '@/components/paginas/producto/grillaMovimientosProducto';
 
 import obtenerinfoProducto from '@/services/producto/obtenerInformacionProducto';
 import { InfoProducto } from '@/services/producto/types/InterfacesProducto';
@@ -19,6 +20,7 @@ const DetalleProducto  = () => {
   
   const [errorProducto, setErrorProducto] = useState<boolean | undefined >(undefined);
   const [producto, setProducto] = useState<InfoProducto | undefined>(undefined);
+  const [ recargasMovimientosPorNuevoIngreso, setRecargasMovimientosPorNuevoIngreso] = useState<number>(0);
 
   useEffect(() => {
     obtenerinfoProducto(id)
@@ -31,6 +33,7 @@ const DetalleProducto  = () => {
     })
   }, []);
 
+
   return (
     <div>
        <LayoutPages>
@@ -38,7 +41,6 @@ const DetalleProducto  = () => {
             (errorProducto === true ) &&
               <Mensaje titulo='Producto no encontrado' mensaje='No fue posible obtener producto desde los registros base' tipoMensaje='NOTFOUND' footerMensaje=''></Mensaje>
           }
-
           {
             (errorProducto === false &&  producto !== undefined) &&
               <>
@@ -47,10 +49,15 @@ const DetalleProducto  = () => {
                 <div className="container-fluid">
                   <div className="row justify-content-center">
                     <div className="col-lg-6 text-center">
-                      <FormularioRegistrarIngresoEgreso producto={producto}></FormularioRegistrarIngresoEgreso>
+                      <FormularioRegistrarIngresoEgreso producto={producto}  recargasMovimiento={recargasMovimientosPorNuevoIngreso} setRecargarMovimiento={setRecargasMovimientosPorNuevoIngreso}></FormularioRegistrarIngresoEgreso>
                     </div>
                     <div className="col-lg-6 text-center">
                       <FormularioCambioNombre producto={producto} actualizarProducto={setProducto}></FormularioCambioNombre>
+                      <br/>
+                      <br/>
+                      <div> 
+                        <GrillaMovimientoProducto contador={recargasMovimientosPorNuevoIngreso} producto={producto}></GrillaMovimientoProducto>
+                      </div>
                     </div>
                   </div>
                 </div>

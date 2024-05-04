@@ -20,10 +20,12 @@ import nuevoMovimientoIngresoEgreso from '@/services/movimientosProducto/nuevoMo
 
 interface Props {
     producto: InfoProducto;
+    recargasMovimiento: number;
+    setRecargarMovimiento: (value: number) => void;
 }
 
 
-const FormularioRegistrarIngresoEgreso : React.FC<Props> = ({ producto }) => {
+const FormularioRegistrarIngresoEgreso : React.FC<Props> = ({ producto , recargasMovimiento, setRecargarMovimiento}) => {
 
     const options = [{key :'ING',value: 'Ingreso'}, {key: 'EGR', value: 'Egreso'}];
 
@@ -136,6 +138,7 @@ const FormularioRegistrarIngresoEgreso : React.FC<Props> = ({ producto }) => {
                 setMensajeAlertaIngresoEgreso(nuevoMovimiento.mensaje);
                 setTipoAlerta( (nuevoMovimiento.stockActual !== null) ? "SUC" :"ERR" );
                 if(nuevoMovimiento.stockActual || nuevoMovimiento.stockActual === 0){
+                    setRecargarMovimiento(recargasMovimiento + 1);
                     if(nuevoMovimiento.stockActual > 0){
                         setStockActual(nuevoMovimiento.stockActual);
                     }
