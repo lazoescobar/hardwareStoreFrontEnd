@@ -14,7 +14,7 @@ const Spinner : React.FC<Props> = ({ mostrar, mensaje }) => {
           <div className="col-lg-1 text-end">
               <div className={styles.spinner}></div>
           </div>
-          <div className="col-lg-8 text-center">
+          <div className="col-lg-8 text-start">
               <strong> {mensaje} </strong>
           </div>
       </div>

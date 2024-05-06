@@ -1,0 +1,19 @@
+.divbase {
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 20px;
+    padding: 10px; /* Añade relleno para separar el contenido de los bordes */
+}
+
+.alturatabla {
+
+    height: 300px; /* Altura fija deseada */
+    overflow-y: auto; 
+}
+
+.alturatabla  thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Color de fondo para la cabecera */
+    z-index: 1;
+}

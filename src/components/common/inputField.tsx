@@ -50,7 +50,7 @@ const InputField: React.FC<InputProps> = ({ disabled = false, className, placeho
           type={type} 
           value={ value } 
           onChange={handleChange} 
-          required 
+          required={false}
           disabled={disabled}
           />
         {error && <div className="invalid-feedback">{mensajeValidacion}</div>}

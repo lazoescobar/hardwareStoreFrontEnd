@@ -16,4 +16,21 @@ export interface InformacionStockProducto{
     mensaje: string;
     stockActual : number;
 }
+
+
+
+/* Consulta producto */
+export interface Producto {
+    id: number;
+    nombre: string;
+    fechaRegistroProducto: string;
+    fechaUltimoIngreso: string;
+    fechaUltimoEngreso: string;
+    stockActual: number;
+}
+
+export interface InterfaceConsultaProductos {
+    mensaje: string;
+    productos: Array<Producto>;
+}
   
