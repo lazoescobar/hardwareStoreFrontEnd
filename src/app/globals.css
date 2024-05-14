@@ -54,11 +54,37 @@ input.custom-input {
 input.custom-input-white {
     width: 90%;
     margin: 0 auto;
-    
     border: 1px solid #000; 
 }
+
+input.custom-input-white-with-margin {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border: 1px solid #000; 
+
+}
+
+select.custom-input-white-with-margin {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border: 1px solid #000; 
+
+}
+
 
 .button-login {
     width: 40%;
     background: linear-gradient(180deg, #a6cee2 0%, #87c7f1 100%);
+}
+
+
+.linea-horizontal{
+    size: 2px;
+    color: #000;
 }

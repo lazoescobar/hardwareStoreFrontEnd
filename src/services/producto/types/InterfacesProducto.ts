@@ -33,4 +33,23 @@ export interface InterfaceConsultaProductos {
     mensaje: string;
     productos: Array<Producto>;
 }
-  
+ 
+
+/* Consulta producto por nombre*/
+export interface ProductoPorNombre {
+    nombre: string;
+    fechaRegistroProducto: string;
+}
+
+export interface InterfaceConsultaProductosPorNombre {
+    mensaje: string;
+    productos: Array<ProductoPorNombre>;
+}
+
+
+export interface InterfaceNuevoProducto {
+    status: number;
+    data : {
+        mensaje: string;
+    }
+}

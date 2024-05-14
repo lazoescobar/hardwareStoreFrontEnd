@@ -20,10 +20,6 @@ interface Props {
 
 const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, todos}) => {
 
-    console.log("contador ", contador);
-    console.log("nombreBusqueda ", nombreBusquedaProducto);
-    console.log("todos ", todos)
-
     const [cargando, setCargando] = useState<boolean>(true);
     const mensajeCargando: string = "Espere un momento... Cargando listado de productos";
     const [errorCarga, setErrorCarga] = useState<boolean>(true);
@@ -61,9 +57,9 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
     }, [contador]);
 
   return (
-    <div className={styles.divbase}>
-        <div className="container-fluid">
-            <div className="row justify-content-center">
+        <div className={styles.divbase}>
+            <div className="container-fluid">
+                <div className="row justify-content-center">
                     <div className={(!cargando && !errorCarga) ? styles.alturatabla : ""}>
                         <div className="col-lg-12 text-center">
                             <table className="table table-bordered">
@@ -79,7 +75,6 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
                                 </thead>
                                 {           
                                     (cargando === false && errorCarga === false) &&
-                                    
                                     <tbody>
                                     {  
                                         productos.map((producto, index) => (
@@ -103,28 +98,30 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
                                     </tbody>
                                 }
                             </table>
-                                
-                        </div>    
+                        </div>     
                     </div>
-                    {
-                        (cargando) && 
-                        <div className="col-lg-6 text-center">
+                </div>
+                {
+                    (cargando) && 
+                    <div className="row justify-content-center">
+                        <div className="col-lg-4 text-center">
                             <br/>
                             <Spinner mostrar={cargando} mensaje={mensajeCargando}></Spinner>
                         </div>
-                    }
-
-                    {
-                        (errorCarga) && 
+                    </div>
+                }
+                {
+                    (errorCarga) && 
+                    <div className="row justify-content-center">
                         <div className="col-lg-8 text-center">
-                             <br/>
+                            <br/>
                             <strong> {mensajeErrorCarga} </strong>
                         </div>
-                    }
+                    </div>
+                }   
             </div>
         </div>
-    </div>
-  );
+    );
 };
 
 export default GrillaProductos;

@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import Footer from "@/components/common/footer";
 import InputField from "@/components/common/inputField";
+import Spinner from '@/components/common/spinner';
 
 const LoginPage = () => {
 
@@ -14,6 +15,7 @@ const LoginPage = () => {
   const [error, setError] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loginOk, setLoginOk] = useState<boolean>(false);
   const router = useRouter();
 
   const handleInputChangeUss = (value: string, error: boolean | undefined) => {
@@ -40,8 +42,11 @@ const LoginPage = () => {
         setError(responseNextAuth?.error);
         return;
       }
-      
-      router.push("/cestaproductos");
+
+      setLoginOk(true);
+      setTimeout(() => {
+        router.push("/cestaproductos");  
+      }, 3000);
     }
   };
 
@@ -90,6 +95,17 @@ const LoginPage = () => {
               <div className="text-center alert alert-danger" role="alert">
                 {error}
               </div>
+            }
+            {
+              (loginOk) && 
+              <>
+                <br/>
+                <div className="row justify-content-center">
+                  <div className="col-md-8">
+                    <Spinner mostrar={loginOk} mensaje={`Autenticación correcta. Dirigiendo a cesta de productos`}></Spinner>
+                  </div>
+                </div>
+              </>
             }
           </div>
         </div>
