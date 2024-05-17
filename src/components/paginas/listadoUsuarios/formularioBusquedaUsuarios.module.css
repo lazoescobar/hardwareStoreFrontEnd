@@ -1,0 +1,14 @@
+.border {
+    margin-left: 5%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px; /* Añade relleno para separar el contenido de los bordes */
+}
+
+.subrayado {
+    text-decoration: underline;
+}
+
+.boton{
+    width: 100%; /* Ancho fijo */
+}

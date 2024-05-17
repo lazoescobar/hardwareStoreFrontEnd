@@ -27,8 +27,6 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
     const [mensajeErrorCarga, setMensajeErrorCarga] = useState<string>("");
     const [productos, setProductos] = useState<Array<Producto>>([]);
 
-    console.log(tipoUsuario); 
-
     useEffect(() => {
         if(cargando === false){
             setCargando(true);

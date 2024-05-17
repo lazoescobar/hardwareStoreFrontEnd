@@ -1,0 +1,39 @@
+.divbase {
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 20px;
+    padding: 10px; /* Añade relleno para separar el contenido de los bordes */
+}
+
+.alturatabla {
+
+    height: 300px; /* Altura fija deseada */
+    overflow-y: auto; 
+}
+
+.alturatabla  thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Color de fondo para la cabecera */
+    z-index: 1;
+}
+
+
+.textgreen {
+    color: green;
+}
+
+.textred {
+    color: red;
+}
+
+.btn {
+    cursor: pointer;
+    border: 1px solid #3498db;
+    background-color: transparent;
+    height: 50px;
+    width: 200px;
+    color: #3498db;
+    font-size: 1.5em;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+}
