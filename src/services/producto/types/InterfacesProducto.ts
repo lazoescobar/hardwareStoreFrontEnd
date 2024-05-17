@@ -27,6 +27,7 @@ export interface Producto {
     fechaUltimoIngreso: string;
     fechaUltimoEngreso: string;
     stockActual: number;
+    tipo: string;
 }
 
 export interface InterfaceConsultaProductos {

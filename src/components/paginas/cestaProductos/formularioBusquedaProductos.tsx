@@ -21,13 +21,10 @@ const FormularioBusquedaProducto : React.FC<Props> = ({contadorRecargas, recarga
 
     const [botonDesabilitado, setBotonDesabilitado] = useState<boolean>(true);
     
-
-
     const { data:session } = useSession();
     if(!session){
         return;
     }
-
 
     const handleInputChangeNombre = (value: string, error: boolean | undefined) => {
         setNombre(value);

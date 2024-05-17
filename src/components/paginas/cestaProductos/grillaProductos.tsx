@@ -16,15 +16,18 @@ interface Props {
     contador: number;
     nombreBusquedaProducto: string;
     todos: boolean;
+    tipoUsuario: string;
 }
 
-const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, todos}) => {
+const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, todos, tipoUsuario}) => {
 
     const [cargando, setCargando] = useState<boolean>(true);
     const mensajeCargando: string = "Espere un momento... Cargando listado de productos";
     const [errorCarga, setErrorCarga] = useState<boolean>(true);
     const [mensajeErrorCarga, setMensajeErrorCarga] = useState<string>("");
     const [productos, setProductos] = useState<Array<Producto>>([]);
+
+    console.log(tipoUsuario); 
 
     useEffect(() => {
         if(cargando === false){
@@ -36,7 +39,6 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
             consultaProductos(nombreBusquedaProducto, todos)
             .then(response => {
                 const infoConsultaProductos : InterfaceConsultaProductos = response;
-                console.log(infoConsultaProductos);
                 if(infoConsultaProductos.productos){
                     setErrorCarga(false)
                     setProductos(infoConsultaProductos.productos);
@@ -78,18 +80,19 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
                                     <tbody>
                                     {  
                                         productos.map((producto, index) => (
-                                            <tr key={"tr-row"+index}>
+                                            <tr key={"tr-row"+index} className={( tipoUsuario === "DUE" && ((producto.tipo === "CAJ" && producto.stockActual < 5) || (producto.tipo === "UNI" && producto.stockActual < 20))) ? styles.colored: ""}>
                                                 <td>{producto.nombre}</td>
                                                 <td>{producto.fechaRegistroProducto}</td>
                                                 <td>{ producto.fechaUltimoIngreso ?? "Sin ingresos" }</td>
                                                 <td>{ producto.fechaUltimoIngreso ?? "Sin egresos" }</td>
                                                 <td>{producto.stockActual}</td>
-                                                <td>
-                                                    <div>
+                                                
+                                                <td className={styles.textblack}>
+                                                    <div >
                                                         <Link legacyBehavior href={`/producto/${producto.id}`} prefetch={false} replace passHref>
-                                                            <a href={`/producto/${producto.id}`} ><strong>Ver producto </strong></a>
+                                                            <a href={`/producto/${producto.id}`} className={styles.textblack}><strong className={styles.textblack}>Ver producto </strong></a>
                                                         </Link>
-                                                        <FontAwesomeIcon icon={faEye} />
+                                                        <FontAwesomeIcon icon={faEye} className={styles.textblack}/>
                                                     </div>
                                                     
                                                 </td>

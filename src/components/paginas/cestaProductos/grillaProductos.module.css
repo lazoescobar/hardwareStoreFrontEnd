@@ -17,3 +17,11 @@
     background-color: #fff; /* Color de fondo para la cabecera */
     z-index: 1;
 }
+
+tr.colored td {
+    color: red;
+}
+
+.textblack {
+    color: black;
+}

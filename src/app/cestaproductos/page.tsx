@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "next-auth/react";
 import { useState } from 'react';
 
 import LayoutPages from '../../layout/LayoutPages';
@@ -12,6 +13,12 @@ const CestaProductos  = () => {
   const [contador, setContador] = useState<number>(0);
   const [nombreBusqueda, setNombreBusqueda] = useState<string>("");
   const [todosBusqueda, setTodosBusqueda] = useState<boolean>(true);
+
+  const { data:session } = useSession();
+  if(!session){
+      return;
+  }
+  const { user } = session;
 
   return (
     <div>
@@ -29,7 +36,7 @@ const CestaProductos  = () => {
             <div className="col-lg-12 text-center">
               <br/>
               <br/>
-              <GrillaProductos contador={contador} nombreBusquedaProducto={nombreBusqueda} todos={todosBusqueda}></GrillaProductos>
+              <GrillaProductos contador={contador} nombreBusquedaProducto={nombreBusqueda} todos={todosBusqueda} tipoUsuario={user.tipo}></GrillaProductos>
             </div>
           </div>
         </div>
