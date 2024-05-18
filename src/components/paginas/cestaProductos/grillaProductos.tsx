@@ -64,7 +64,7 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
                         <div className="col-lg-12 text-center">
                             <table className="table table-bordered">
                                 <thead>
-                                    <tr>
+                                    <tr className="table-secondary">
                                         <th scope="col">Nombre producto</th>
                                         <th scope="col">Fecha registro producto</th>
                                         <th scope="col">Fecha último ingreso</th>

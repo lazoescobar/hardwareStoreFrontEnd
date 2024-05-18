@@ -79,7 +79,7 @@ const GrillaMovimientoProducto : React.FC<Props> = ({ contador,  producto }) => 
                     <div className={styles.alturatabla}>
                         <div className="col-lg-12 text-center">
                             <table className="table table-bordered">
-                                <thead>
+                                <thead className="table-secondary">
                                     <tr>
                                     <th scope="col">Fecha Movimiento</th>
                                     <th scope="col">Tipo Movimiento</th>

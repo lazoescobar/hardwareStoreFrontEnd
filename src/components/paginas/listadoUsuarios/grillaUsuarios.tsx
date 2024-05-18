@@ -67,7 +67,7 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                         <div className="col-lg-12 text-center">
                             <table className="table table-bordered">
                                 <thead>
-                                    <tr>
+                                    <tr className="table-secondary">
                                         <th scope="col">Nombre usuario</th>
                                         <th scope="col">Nombre Completo</th>
                                         <th scope="col">Perfil</th>
@@ -88,7 +88,7 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                                                 <td>{usuario.fechaRegistro}</td>
                                                 <td className={styles.textblack}>
                                                     <div className="row">
-                                                        <div className="col-lg-6 text-start">
+                                                        <div className="col-lg-6 text-center">
                                                             <Link legacyBehavior href={`/producto/${usuario.id}`} prefetch={false} replace passHref>
                                                                 <a href={`/producto/${usuario.id}`} className={styles.textblack}><strong className={styles.textblack}>Modificar Pass </strong></a>
                                                             </Link>
