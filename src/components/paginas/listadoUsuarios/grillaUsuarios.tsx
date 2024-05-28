@@ -89,8 +89,8 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                                                 <td className={styles.textblack}>
                                                     <div className="row">
                                                         <div className="col-lg-6 text-center">
-                                                            <Link legacyBehavior href={`/producto/${usuario.id}`} prefetch={false} replace passHref>
-                                                                <a href={`/producto/${usuario.id}`} className={styles.textblack}><strong className={styles.textblack}>Modificar Pass </strong></a>
+                                                            <Link legacyBehavior href={`/usuario/${usuario.id}`} prefetch={false} replace passHref>
+                                                                <a href={`/usuario/${usuario.id}`} className={styles.textblack}><strong className={styles.textblack}>Modificar Pass </strong></a>
                                                             </Link>
                                                         </div>
                                                         <div className="col-lg-6 text-end">
