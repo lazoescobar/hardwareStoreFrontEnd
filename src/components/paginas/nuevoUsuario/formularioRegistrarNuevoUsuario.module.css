@@ -1,0 +1,36 @@
+.border {
+    margin-left: 5%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px; /* Añade relleno para separar el contenido de los bordes */
+}
+
+.subrayado {
+    text-decoration: underline;
+}
+
+
+.transparentbuttonsuma {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    font-size: 40px; /* Tamaño de fuente */
+    color: #10eb08; /* Color del texto */
+    cursor: pointer; /* Cursor de puntero al pasar el ratón */
+    /* Añade otros estilos según tus necesidades */
+}
+
+.transparentbuttonresta {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    font-size: 40px; /* Tamaño de fuente */
+    color: #ee0707; /* Color del texto */
+    cursor: pointer; /* Cursor de puntero al pasar el ratón */
+    /* Añade otros estilos según tus necesidades */
+}
+
+.validacionmensaje{
+    color: #ee0707; 
+}
+  

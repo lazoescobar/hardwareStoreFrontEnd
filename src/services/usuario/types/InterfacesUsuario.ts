@@ -29,4 +29,12 @@ export interface InterfaceConsultaUsuario {
 export interface General{
     mensaje: string;
 }
+
+
+export interface InterfaceNuevoUsuario {
+    status: number;
+    data : {
+        mensaje: string;
+    }
+}
  

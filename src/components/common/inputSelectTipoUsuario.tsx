@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
 interface SelectProps {
+  valido: boolean;
   onSelect: (value: string) => void;
 }
 
-const InputSelect: React.FC<SelectProps> = ({ onSelect }) => {
+const InputSelectTipoUsuario: React.FC<SelectProps> = ({ valido, onSelect }) => {
   const [selectedValue, setSelectedValue] = useState<string>('');
 
   const options= [
     { value: '', label: 'Seleccione' },
-    { value: 'CAJ', label: 'Caja' },
-    { value: 'UNI', label: 'Unidad' }
+    { value: 'DUE', label: 'Dueño' },
+    { value: 'NEG', label: 'Negocio' }
     ];
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -19,8 +20,11 @@ const InputSelect: React.FC<SelectProps> = ({ onSelect }) => {
     onSelect(value);
   };
 
+  const classNameBase = "form-select custom-input-white-with-margin";
+  const classNameSelect = (valido) ? classNameBase : classNameBase + " is-invalid";
+
   return (
-    <select className="form-select custom-input-white-with-margin" value={selectedValue} onChange={handleChange}>
+    <select className={classNameSelect} value={selectedValue} onChange={handleChange}>
       {options.map(option => (
         <option key={option.value} value={option.value}>
           {option.label}
@@ -30,4 +34,4 @@ const InputSelect: React.FC<SelectProps> = ({ onSelect }) => {
   );
 };
 
-export default InputSelect;
+export default InputSelectTipoUsuario;

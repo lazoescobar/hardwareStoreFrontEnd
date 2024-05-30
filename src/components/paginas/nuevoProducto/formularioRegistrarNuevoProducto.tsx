@@ -8,7 +8,7 @@ import styles from './formularioRegistrarNuevoProducto.module.css';
 import Spinner from '@/components/common/spinner';
 import Alert from '@/components/paginas/alert'
 
-import InputSelect from '@/components/common/inputSelect'
+import InputSelectTipoProducto from '@/components/common/inputSelectTipoProducto'
 
 import registrarNuevoProducto from '@/services/producto/registrarNuevoProducto';
 import {InterfaceNuevoProducto} from '@/services/producto/types/InterfacesProducto';
@@ -184,7 +184,7 @@ const FormularioRegistrarNuevoProducto : React.FC = () => {
                                             <h5 className={styles.subrayado}><strong> Tipo producto: </strong></h5>
                                         </div>
                                         <div className="col-lg-6 text-center">
-                                            <InputSelect
+                                            <InputSelectTipoProducto
                                                 onSelect={handleSelect}
                                             />
                                             {
