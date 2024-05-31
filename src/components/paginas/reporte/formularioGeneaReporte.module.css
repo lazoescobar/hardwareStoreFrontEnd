@@ -1,0 +1,25 @@
+.border {
+    margin-left: 5%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px; /* Añade relleno para separar el contenido de los bordes */
+}
+
+.subrayado {
+    text-decoration: underline;
+}
+
+
+.inputlikediv {
+    display: inline-block;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color : #E2E0E0;
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid #000; 
+}
+
+.validacionmensaje{
+    color: #ee0707; 
+}

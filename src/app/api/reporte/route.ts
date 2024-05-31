@@ -1,36 +1,74 @@
 import { NextRequest, NextResponse } from 'next/server';
 import ExcelJS from 'exceljs';
 
-export async function GET(req: NextRequest) {
-  try {
-    // Crear un nuevo workbook
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Reporte');
+export async function POST(request: NextRequest) {
+  const bodyRequest = await request.json();
+  if( bodyRequest?.fechaDesde && bodyRequest?.fechaHasta){
+    const { fechaDesde, fechaHasta} = bodyRequest;
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/modulo-inventario/movimiento-producto/consulta-movimientos-por-rango-fechas`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store',
+        body: JSON.stringify({ 
+          fechaDesde,
+          fechaHasta,
+        }),
+      });
 
-    // Añadir columnas
-    worksheet.columns = [
-      { header: 'ID', key: 'id', width: 10 },
-      { header: 'Nombre', key: 'name', width: 30 },
-      { header: 'Edad', key: 'age', width: 10 },
-    ];
+      const workbook = new ExcelJS.Workbook();
+      const data = await response.json();
 
-    // Añadir filas (esto es solo un ejemplo, los datos pueden provenir de una base de datos)
-    worksheet.addRow({ id: 1, name: 'Juan', age: 25 });
-    worksheet.addRow({ id: 2, name: 'Ana', age: 28 });
+      const {fechas} = data;
 
-    // Generar archivo en buffer
-    const buffer = await workbook.xlsx.writeBuffer();
+      for (let clave in fechas) {
+        if (fechas.hasOwnProperty(clave)) {
+          const sheet = workbook.addWorksheet(clave);
+          sheet.columns = [
+            { header: 'nombre Producto', key: 'nombreProducto', width: 100 },
+            { header: 'Tipo Movimiento', key: 'tipoMovimiento', width: 40 },
+            { header: 'Cantidad', key: 'cantidad', width: 20 },
+          ];
+          const movimientos = fechas[clave];
+          for (let movimiento of movimientos) {
+            const movimientoObject = {nombreProducto: movimiento.nombreProducto, tipoMovimiento: movimiento.tipoMovimiento, cantidad: movimiento.cantidad};
+            sheet.addRow(movimientoObject);
+          }
+          const headerRow1 = sheet.getRow(1);
+          headerRow1.eachCell((cell, colNumber) => {
+            cell.fill = {
+              type: 'pattern',
+              pattern: 'solid',
+              fgColor: { argb: '93AABF' },
+            };
+            cell.font = {
+              bold: true,
+            };
+            cell.border = {
+              top: { style: 'thin' },
+              left: { style: 'thin' },
+              bottom: { style: 'thin' },
+              right: { style: 'thin' },
+            };
+          });
+        }
+      }
+      
+      const buffer = await workbook.xlsx.writeBuffer();
+      const headers = new Headers({
+        'Content-Disposition': 'attachment; filename=report.xlsx',
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      });
 
-    // Configurar las cabeceras para la descarga
-    const headers = new Headers({
-      'Content-Disposition': 'attachment; filename=report.xlsx',
-      'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    });
-
-    // Devolver el archivo como respuesta
-    return new NextResponse(buffer, { headers });
-  } catch (err) {
-    console.error('Error generating report', err);
-    return new NextResponse('Error generating report', { status: 500 });
+      return new NextResponse(buffer, { headers });
+    } catch (err) {
+      console.error('Error generating report', err);
+      return new NextResponse('Error generating report', { status: 500 });
+    }
+  }
+  else{
+    throw new Error('Parametros en peticion no existen');
   }
 }
