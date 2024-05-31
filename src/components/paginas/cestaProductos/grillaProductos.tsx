@@ -70,7 +70,10 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
                                         <th scope="col">Fecha último ingreso</th>
                                         <th scope="col">Fecha último engreso</th>
                                         <th scope="col">Cantidad stock actual</th>
-                                        <th scope="col"></th>
+                                        {
+                                            (tipoUsuario !== "DUE") &&
+                                            <th scope="col"></th>
+                                        }
                                     </tr>
                                 </thead>
                                 {           
@@ -84,16 +87,18 @@ const GrillaProductos : React.FC<Props> = ({ contador, nombreBusquedaProducto, t
                                                 <td>{ producto.fechaUltimoIngreso ?? "Sin ingresos" }</td>
                                                 <td>{ producto.fechaUltimoIngreso ?? "Sin egresos" }</td>
                                                 <td>{producto.stockActual}</td>
+                                                {
+                                                     (tipoUsuario !== "DUE") && 
+                                                    <td className={styles.textblack}>
+                                                        <div >
+                                                            <Link legacyBehavior href={`/producto/${producto.id}`} prefetch={false} replace passHref>
+                                                                <a href={`/producto/${producto.id}`} className={styles.textblack}><strong className={styles.textblack}>Ver producto </strong></a>
+                                                            </Link>
+                                                            <FontAwesomeIcon icon={faEye} className={styles.textblack}/>
+                                                        </div>
+                                                    </td>
+                                                }
                                                 
-                                                <td className={styles.textblack}>
-                                                    <div >
-                                                        <Link legacyBehavior href={`/producto/${producto.id}`} prefetch={false} replace passHref>
-                                                            <a href={`/producto/${producto.id}`} className={styles.textblack}><strong className={styles.textblack}>Ver producto </strong></a>
-                                                        </Link>
-                                                        <FontAwesomeIcon icon={faEye} className={styles.textblack}/>
-                                                    </div>
-                                                    
-                                                </td>
                                             </tr>
                                     ))}
                                     </tbody>
