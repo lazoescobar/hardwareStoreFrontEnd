@@ -8,29 +8,27 @@ import styles from './grillaUsuarios.module.css'
 import Spinner from '@/components/common/spinner';
 
 import consultaUsuarios from '@/services/usuario/consultaUsuarios';
-import {InterfaceConsultaUsuarios, Usuario} from '@/services/usuario/types/InterfacesUsuario';
+import {InterfaceConsultaUsuarios, Usuario, General} from '@/services/usuario/types/InterfacesUsuario';
+import desactivarUsuario from '@/services/usuario/desactivarUsuario';
 
 interface Props {
+    nombreUsuario: string;
+    idUsuario: number;
     contador: number;
     nombreBusquedaProducto: string;
     todos: boolean;
 }
 
-const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, todos}) => {
+const GrillaUsuarios : React.FC<Props> = ({ nombreUsuario, idUsuario, contador, nombreBusquedaProducto, todos}) => {
 
     const [cargando, setCargando] = useState<boolean>(true);
-    const mensajeCargando: string = "Espere un momento... Cargando listado de usuarios";
+    const mensajeCarga: string = "Espere un momento... Cargando listado de usuarios";
+    const [mensajeCargando, setMensajeCargando] = useState<string>(mensajeCarga);
     const [errorCarga, setErrorCarga] = useState<boolean>(true);
     const [mensajeErrorCarga, setMensajeErrorCarga] = useState<string>("");
     const [usuarios, setUsuarios] = useState<Array<Usuario>>([]);
 
-    useEffect(() => {
-        if(cargando === false){
-            setCargando(true);
-            setMensajeErrorCarga("");
-        }
-
-        
+    const cargaInfoUsuarios = () => {
         setTimeout(() => {
             consultaUsuarios(nombreBusquedaProducto, todos)
             .then(response => {
@@ -47,16 +45,33 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                 setCargando(false);
             })
             .catch(error => {
-                setCargando(false);
                 setMensajeErrorCarga("No se encontaron productos");
+                setCargando(false);
             })
-
         }, 2000);
+    }
+
+    useEffect(() => {
+        if(cargando === false){
+            setCargando(true);
+            setMensajeErrorCarga("");
+        }
+
+        setMensajeCargando(mensajeCarga);
+        cargaInfoUsuarios();
     }, [contador]);
 
-    const activarODesactivar = async (idUsuario: number, estado: string) => {
-       console.log(idUsuario);
-       console.log(estado);
+    const desactivar = async (idUsuarioDesactivar: number) => {
+        setUsuarios([]);
+        setCargando(true);
+        setMensajeCargando("Espere un momento... Desactivando usuario");
+        desactivarUsuario(idUsuario, idUsuarioDesactivar)
+        .then(response => {
+            cargaInfoUsuarios();
+        })
+        .catch(error => {
+            cargaInfoUsuarios();
+        })
     }
 
     return (
@@ -86,6 +101,7 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                                                 <td>{usuario.nombreCompleto}</td>
                                                 <td>{usuario.perfil}</td>
                                                 <td>{usuario.fechaRegistro}</td>
+
                                                 <td className={styles.textblack}>
                                                     <div className="row">
                                                         <div className="col-lg-6 text-center">
@@ -93,23 +109,26 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                                                                 <a href={`/usuario/${usuario.id}`} className={styles.textblack}><strong className={styles.textblack}>Modificar Pass </strong></a>
                                                             </Link>
                                                         </div>
-                                                        <div className="col-lg-6 text-end">
 
-                                                            <button className="btn" onClick={()=> activarODesactivar(usuario.id, usuario.estado) }>
-                                                             {
-                                                                (usuario.estado === "ACT") 
-                                                                ? 
-                                                                    <strong className={styles.textgreen}>ON 
-                                                                        <FontAwesomeIcon icon={faToggleOff} />
-                                                                    </strong>
-                                                                :
-                                                                    <strong className={styles.textred}>OFF 
-                                                                        <FontAwesomeIcon icon={faToggleOn} />
-                                                                    </strong>
-                                                            }    
-                                                             </button>
-                                                            
-                                                        </div>
+                                                        {
+                                                            (nombreUsuario !== usuario.nombreUsuario) &&
+                                                            <div className="col-lg-6 text-end">
+                                                                    {
+                                                                    (usuario.estado === "ACT") 
+                                                                    ? 
+                                                                        <button className="btn" onClick={()=> desactivar(usuario.id) }>
+                                                                            <strong className={styles.textgreen}>ON 
+                                                                                <FontAwesomeIcon icon={faToggleOff} />
+                                                                            </strong>
+                                                                        </button>
+                                                                    :
+                                                                        <strong className={styles.textred}>OFF 
+                                                                            <FontAwesomeIcon icon={faToggleOn} />
+                                                                        </strong>
+                                                                }    
+                                                            </div>
+                                                        }
+                                                       
                                                     </div>
                                                 </td>
                                             </tr>
@@ -129,6 +148,7 @@ const GrillaUsuarios : React.FC<Props> = ({ contador, nombreBusquedaProducto, to
                         </div>
                     </div>
                 }
+
                 {
                     (errorCarga) && 
                     <div className="row justify-content-center">

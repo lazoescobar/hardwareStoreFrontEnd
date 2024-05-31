@@ -36,7 +36,7 @@ const CestaProductos  = () => {
             <div className="col-lg-12 text-center">
               <br/>
               <br/>
-              <GrillaUsuarios contador={contador} nombreBusquedaProducto={nombreBusqueda} todos={todosBusqueda}></GrillaUsuarios>
+              <GrillaUsuarios nombreUsuario={session.user.nombreUsuario} idUsuario={session.user.id} contador={contador} nombreBusquedaProducto={nombreBusqueda} todos={todosBusqueda}></GrillaUsuarios>
             </div>
           </div>
         </div>
