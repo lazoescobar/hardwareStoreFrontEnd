@@ -35,11 +35,6 @@ const GeneraReporte  = () => {
           <div className="container-fluid">
             <div className="row justify-content-center">
               <div className="col-lg-8 text-center">
-                {
-                  /*
-                   <button onClick={handleDownload}>Download Report</button>
-                  */
-                }
                 <FormularioGenerarReporte/>
               </div>
             </div>

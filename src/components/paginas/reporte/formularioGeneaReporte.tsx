@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import styles from './formularioGeneaReporte.module.css'
 import InputField from "@/components/common/inputField";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faEye} from '@fortawesome/free-solid-svg-icons';
 
 import Spinner from '@/components/common/spinner';
 import Alert from '@/components/paginas/alert';
@@ -70,7 +68,7 @@ const FormularioGenerarReporte : React.FC = () => {
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'report.xlsx');
+                link.setAttribute('download', 'reporte_movimientos.xlsx');
                 document.body.appendChild(link);
                 link.click();
                 setCargando(false);

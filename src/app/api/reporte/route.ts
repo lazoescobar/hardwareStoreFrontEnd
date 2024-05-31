@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       
       const buffer = await workbook.xlsx.writeBuffer();
       const headers = new Headers({
-        'Content-Disposition': 'attachment; filename=report.xlsx',
+        'Content-Disposition': 'attachment; filename=reporte_movimientos.xlsx',
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       });
 

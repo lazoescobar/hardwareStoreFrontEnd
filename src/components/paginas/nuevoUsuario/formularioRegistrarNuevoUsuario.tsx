@@ -341,7 +341,13 @@ const FormularioRegistrarNuevoUsuario : React.FC<Props> = ({ idUsuario }) => {
                                                 onChange={handleInputNombres} 
                                             /> 
                                         </div>
-                                        <div className="col-lg-4 text-center"></div>
+                                        <div className="col-lg-1 text-center"></div>
+                                        <div className="col-lg-2 text-center">
+                                            <div className="d-grid gap-2">
+                                                <button type="button" className="btn btn-secondary" onClick={ () => {}}> Limpiar </button>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-1 text-center"></div>
                                     </div>  
                                 </div>
                             </div>
